@@ -1,0 +1,22 @@
+Aisoft CommandLine
+====================================
+[1] I am not responsible for how you use this.
+[2] Any illegal distribution will not be tolerated.
+[3] Don't sell this software for money.
+License Info By Aisoft-co
+================================================
+Software  : CommandLine
+Usage     : For Pentesters and Ethical Hackers.
+liscence  : Open-Source
+Interface : CLI (command-line Interface)
+Type      : Terminal
+Version   : 1.8
+Language  : Python3
+================================================
+Release 1.8 
+=============================
+Fixed : Minor Bugs
+Improved : More Optimizations
+============================= 
+=================================================
+END OF LISENCE INFO > BY Aisoft-co
