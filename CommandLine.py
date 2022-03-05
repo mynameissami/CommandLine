@@ -1,39 +1,47 @@
 import cgi
 from collections import ChainMap
 from genericpath import exists
-from os import path, rename
+from os import path, rename, system
 from re import sub
 import rlcompleter
-from colorama import init, Fore, Style
+from time import sleep
+from git import exc
+import os
 
 
 from pytube.extract import video_id
 import youtube_dl
 
-
+def main():
+  # Run check on python version, must be 3.6 or higher because of f strings
+  sys = system
+  if sys.version_info[0] < 3 or system.version_info[1] < 6:
+    print("Error Code U-2: This program requires running python 3.6 or higher! You are running" + str(sys.version_info[0]) + "." + str(sys.version_info[1]))
+    input("Press Enter to exit...")
+    sys.exit()
 def usercommand(self):
     try:
 
         if z == "about":
             # Shows About Info
-            print(Fore.RED +"""CommandLine is an Opensource Program by Aisoft.""")
+            print("""CommandLine is an Opensource Program by Aisoft.""")
 
         # Shows License Info.
         elif z == "license":
             import getpass
             print(f"""
 This Software is licensed to {getpass.getuser()}.
-|-------------------------------------------|
-|              LICENSE INFO                 |
-|              -------------                |    
-|-> From Aisoft-co.                         |
-|-> CLI Based Software.                     |  
-|-> Open-Source.                            |
-|-> Version 1.8 * Latest *                  |
-|-> Language : Python3.                     | 
-|-> For Pentesters and for Ethical Hackers. | 
-|-> Type : Terminal.                        |
-|-------------------------------------------|
+|------------------------------------------------------|   
+|              LICENSE INFO                            |
+|              -------------                           |    
+|-> From Aisoft-co.                                    |
+|-> CLI Based Software.                                |  
+|-> Open-Source.                                       |
+|-> Version 1.9 * Latest *                             |
+|-> Language : Python3.                                | 
+|-> For Pentesters and for Ethical Hackers.            | 
+|-> Type : Terminal.                                   |
+|------------------------------------------------------|
 """)
         # General commands
         # whoami -> Tells The Name of the current user.
@@ -62,6 +70,13 @@ This Software is licensed to {getpass.getuser()}.
 
         # For listing directories:
         elif z == "ls":
+            import os
+
+            files = [f for f in os.listdir('.') if os.path.isfile(f)]
+            for f in files:
+                 print (f)
+        
+        elif z == "ls -a".lstrip():
             import os
             from os import listdir
             from os.path import isfile, join
@@ -95,8 +110,8 @@ This Software is licensed to {getpass.getuser()}.
 
             ## Try to delete the file ##
             if myfile == "CommandLine.py":
-                u1w = input("Do you want to delete this console from pc")
-                if u1w == "yes":
+                askdelfile = input("Do you want to delete this console from pc")
+                if askdelfile == "yes":
                     print("ok removing..")
                     os.remove(myfile)
                 else:
@@ -119,7 +134,7 @@ This Software is licensed to {getpass.getuser()}.
                 print(f"The File named {User3} is updated successfully!")
             except:
                 print(f"{User3} <-- File Not Found!")
-        # Renaame a file
+        # Rename a file
         elif z == "rename.file":
             try:
                 import os
@@ -145,7 +160,7 @@ This Software is licensed to {getpass.getuser()}.
             except:
                 print(f"{askhost} host ip address not found")
         # get host name from ip
-        elif z == "host.get":
+        elif z == "ip.get":
             try:
                 import socket
                 askusrforip = input("Enter Host IP : ")
@@ -174,8 +189,8 @@ This Software is licensed to {getpass.getuser()}.
 
         # Mb to Gb Convertor:
         elif z == "mb.gb":
-            user1 = int(input("Enter Number in MB : "))
-            cf = user1*0.0009765625
+            valmb= int(input("Enter Number in MB : "))
+            cf = valmb*0.0009765625
             print(cf)
 
         # For opening url in the browser
@@ -270,8 +285,8 @@ This Software is licensed to {getpass.getuser()}.
             import subprocess
             proc332 = subprocess.check_output("winver").decode('utf-8')
 
-#-------------------Hacking Scripts---------------------------------#
-# Used Scripts like Ddos and more From github.
+#------------------------Hacking Scripts----------------------------#
+# Used Scripts like Ddos and more From github.                      #
 #-------------------------------------------------------------------#
         # DDOS Attack Script
         elif z == "ddos.start":
@@ -341,16 +356,6 @@ This Software is licensed to {getpass.getuser()}.
                     port2 = int(input("Port       : "))
                     print(
                         f"Starting an DDoS Attack on Host {user13232} ip address is {ip2}:")
-                    print("[                    ] 0% ")
-                    time.sleep(2)
-                    print("[=====               ] 25%")
-                    time.sleep(2)
-                    print("[==========          ] 50%")
-                    time.sleep(2)
-                    print("[===============     ] 75%")
-                    time.sleep(2)
-                    print("[====================] 100%")
-                    time.sleep(2)
                     sent = 0
                     while True:
                         sock.sendto(bytes, (ip2, port2))
@@ -361,13 +366,20 @@ This Software is licensed to {getpass.getuser()}.
                         if port2 == 65534:
                             port2 = 1
                 except KeyboardInterrupt as exception:
-                    KeyboardInterrupt == print("ok")
+                    KeyboardInterrupt == print("Process Stopped - REASON : KeyBoard Interrupt\n")
                 except socket.gaierror:
                     socket.gaierror == print(
                         f"{user13232} <-- Host Not Found + No ip address Found ")
 
         # Git Repo Cloner
-        
+        elif z == "git.clone":
+         try:
+            import git
+            enterdir = input("Enter Directory: ")
+            entergit = input("Enter Git Repo: ")
+            git.GIT_OK(enterdir).clone(entergit)
+         except:
+             print("Unknown Error Was Found!")
 #-------------------Hacking Scripts---------------------------------#
         # download youtube videos
         elif z == "pkg.youtube":
@@ -585,6 +597,7 @@ This Software is licensed to {getpass.getuser()}.
 |------------------------------------------------------------|
 |[*] "ddos.start" Starts an ddos Attack.                     |                                                       
 |[*] "host.getip" Get ip address of host by host url.        |      
+|[*] "ip.get" Gets host name from ip                         |
 |[*] "wlan/show.pass" Show Wifi passwords.                   |
 |[*] "lanport/scan.ip" to scan ip address.                   |
 |------------------------------------------------------------|
@@ -697,7 +710,7 @@ if __name__ == "__main__":
     while True:
         try:
             import getpass
-            z = input(Fore.GREEN +f"{getpass.getuser()} ~$: ").strip()
+            z = input(f"{getpass.getuser()} ~$: ").strip()
             c = usercommand(z)
         except KeyboardInterrupt:
             askussr = input("Do you want to quit? y or n : ")
