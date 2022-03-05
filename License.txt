@@ -10,10 +10,10 @@ Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 1.8
-Language  : Python3
+Version   : 1.9
+Language  : Python3.10.2
 ================================================
-Release 1.8 
+Release 1.9 
 =============================
 Fixed : Minor Bugs
 Improved : More Optimizations
