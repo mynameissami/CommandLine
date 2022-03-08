@@ -10,7 +10,7 @@ Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 1.9
+Version   : 1.9.1
 Language  : Python3.10.2
 ================================================
 Release 1.9.1
