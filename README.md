@@ -82,8 +82,10 @@ All Commands :-
 [#] "lanport/scan.ip" to scan ip addresses.                         
 [#] "check.urlexists" to check if url exists.                       
 [#] "net.browse" to open a website in a browser.                    
-[#] "ls" to list files currently stored in this directory.          
-[#] "python.run" to run python if intalled.                         
+[#] "ls" to list files currently stored in this directory.
+[#] "ls -a" to list files currently stored in this directory.
+[#] "terminal" to use Windows CMD in this Terminal.
+[#] "python.run" to run python if intsalled.                         
 [#] "wlan.renew" to renew all adapters.                             
 [#] "wlan.release" for releasing all the adapters.                  
 [#] "net.speedtest" for testing network speed.                      
@@ -91,6 +93,9 @@ All Commands :-
 [#] "win.ver" to show current version of windows.                   
 [#] "mb.gb" for converting Megabytes into Gigabytes .               
 [#] "gb.mb" for converting Gigabytes into Megabytes.
+```
+```bash
+   For more information of each commands run Commands.chm file.
 ```
 ## Installation from SourceForge
 
