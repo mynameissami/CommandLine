@@ -2,4 +2,4 @@ requests
 wget
 youtube_dl
 pytube
-speedtest
+speedtest-cli
