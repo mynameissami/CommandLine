@@ -3,5 +3,5 @@ pip install requests
 pip install wget
 pip install youtube_dl
 pip install pytube
-pip install speedtest
+pip install speedtest-cli
 exit
