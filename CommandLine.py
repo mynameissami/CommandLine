@@ -37,7 +37,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 1.9 * Latest *                             |
+|-> Version 1.9.1 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -217,7 +217,9 @@ This Software is licensed to {getpass.getuser()}.
                     print(prpc342)
                 except:
                     KeyboardInterrupt == print("ok")
-
+        elif z=="terminal":
+            import os
+            os.system("cmd")
         # port ip scanner:=
         elif z == "lanport/scan.ip":
             import socket
@@ -259,6 +261,9 @@ This Software is licensed to {getpass.getuser()}.
 
         # check network speedtest
         elif z == "net.speedtest":
+         import speedtest
+
+         def getNetSpeed():
             import speedtest
             tester = speedtest.Speedtest()
 
@@ -280,6 +285,9 @@ This Software is licensed to {getpass.getuser()}.
             print(f'-Download speed : {downloadSpeed/1048576 :.2f} Mbits/s')
             print(f'-Upload speed : {uploadSpeed/1048576 :.2f} Mbits/s')
             print(f'-Ping : {ping :.2f} ms')
+
+         for i in range(3):
+                 print(getNetSpeed())
         # Winver
         elif z == "win.ver":
             import subprocess
@@ -628,6 +636,8 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "check.urlexists" to check if url exists.                       |
 |[*] "net.browse" to open a website in a browser.                    |
 |[*] "ls" to list files currently stored in this directory.          |
+|[*] "ls -a" to list files currently stored in this directory.       |
+|[*] "terminal" to use Windows CMD in this Terminal.                 |
 |[*] "python.run" to run python if intalled.                         |
 |[*] "wlan.renew" to renew all adapters.                             |
 |[*] "wlan.release" for releasing all the adapters.                  |
