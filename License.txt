@@ -13,10 +13,11 @@ Type      : Terminal
 Version   : 1.9
 Language  : Python3.10.2
 ================================================
-Release 1.9 
+Release 1.9.1
 =============================
 Fixed : Minor Bugs
-Improved : More Optimizations
+Fixed : Speed test not working
+Added : Now you can use Terminal Within the Command Line
 ============================= 
 =================================================
 END OF LISENCE INFO > BY Aisoft-co
