@@ -85,7 +85,7 @@ All Commands :-
 [#] "ls" to list files currently stored in this directory.
 [#] "ls -a" to list files currently stored in this directory.
 [#] "terminal" to use Windows CMD in this Terminal.
-[#] "python.run" to run python if intsalled.                         
+[#] "python.run" to run python if installed.                         
 [#] "wlan.renew" to renew all adapters.                             
 [#] "wlan.release" for releasing all the adapters.                  
 [#] "net.speedtest" for testing network speed.                      
