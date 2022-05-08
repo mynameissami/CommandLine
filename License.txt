@@ -10,14 +10,16 @@ Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 1.9.1
-Language  : Python3.10.2
+Version   : 2.0.0
+Language  : Python3.10.4
 ================================================
-Release 1.9.1
+Release 2.0.0 - Mega Update
 =============================
 Fixed : Minor Bugs
-Fixed : Speed test not working
-Added : Now you can use Terminal Within the Command Line
+Added : IP Tracker
+Added : Auto-Updater is now Build-In in CommandLine
+Added : Git-Cloner in CommandLine
+Added : More Optimizations.
 ============================= 
 =================================================
 END OF LISENCE INFO > BY Aisoft-co
