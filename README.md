@@ -22,7 +22,9 @@ Command-Line is an Open-Source Software for Pentesters and Ethical Hackers it co
 - Wifi password Extactor.
 - Giga Byte & Mega Byte Convertor.
 - Network Speed test.
-- Shutdown Options
+- Shutdown Options.
+- Git-Repository Clonner.
+- IP Tracker.
 - Giga Byte & Mega Byte Convertor.
 - All basic commands are also Included like in other Terminals
 - Show near by networks.
@@ -93,6 +95,8 @@ All Commands :-
 [#] "win.ver" to show current version of windows.                   
 [#] "mb.gb" for converting Megabytes into Gigabytes .               
 [#] "gb.mb" for converting Gigabytes into Megabytes.
+[#] "update.commandline" for updating commandline.                 
+[#] "git.clone" for cloning git repositories. 
 ```
 ```bash
    For more information of each commands run Commands.chm file.
