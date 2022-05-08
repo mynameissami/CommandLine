@@ -1,0 +1,7 @@
+requests
+wget
+youtube_dl
+pytube
+speedtest-cli
+colorama
+patool
