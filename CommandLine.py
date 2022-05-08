@@ -1,24 +1,15 @@
-import cgi
-from collections import ChainMap
-from genericpath import exists
-from os import path, rename, system
-from re import sub
-import rlcompleter
+from colorama import *
 from time import sleep
-from git import exc
 import os
+import shutil
+from time import sleep
+import requests
+import wget
+import patoolib
+import os
+from getpass import getuser
 
 
-from pytube.extract import video_id
-import youtube_dl
-
-def main():
-  # Run check on python version, must be 3.6 or higher because of f strings
-  sys = system
-  if sys.version_info[0] < 3 or system.version_info[1] < 6:
-    print("Error Code U-2: This program requires running python 3.6 or higher! You are running" + str(sys.version_info[0]) + "." + str(sys.version_info[1]))
-    input("Press Enter to exit...")
-    sys.exit()
 def usercommand(self):
     try:
 
@@ -37,7 +28,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 1.9.1 * Latest *                           |
+|-> Version 2.0.0 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -379,16 +370,58 @@ This Software is licensed to {getpass.getuser()}.
                     socket.gaierror == print(
                         f"{user13232} <-- Host Not Found + No ip address Found ")
 
-        # Git Repo Cloner
+        # app updater
+        elif z == "update.commandline":
+            commandlineupdate()
+        # gitclonner
         elif z == "git.clone":
-         try:
-            import git
-            enterdir = input("Enter Directory: ")
-            entergit = input("Enter Git Repo: ")
-            git.GIT_OK(enterdir).clone(entergit)
-         except:
-             print("Unknown Error Was Found!")
+            from git import Repo
+            import os
+            ask_abt_dir = input("Enter the Location(not gitlink): ")
+            ask_abt_url = input("Enter repository link(git link): ")
+            ask_folder_name = input("Enter the folder name(new folder to store files): ")
+            combine_a = ask_abt_dir+"\\"+ask_folder_name
+            Repo.clone_from(ask_abt_url, combine_a)
+
 #-------------------Hacking Scripts---------------------------------#
+        elif z == "ip.info":
+            init(convert=True)
+            print(f"""{Fore.BLUE}Select Options:
+[A] Track by IP Address - Example [111.111.11.1]
+[B] Track by Host Name - Example [www.example.com]
+[C] Back
+""")
+            print(Fore.RED+"\t\t\t\t\t *You can use 'list' command to see all the options*")
+            
+            command=input(f"{Fore.RED}{getuser()}$: ")
+            if command == "A":
+                print(Fore.RESET)
+                user_ip = input(Fore.BLUE+"ENTER IP ADDRESS: ")
+                url = "http://ip-api.com/json/{0}"
+                response = requests.get(url.format(user_ip)).json()
+                print(Fore.RESET)
+                for key in response:
+                    print(Fore.GREEN+"{0: <15} - {1}".format(key, response[key])) 
+            elif command == "B":
+                user_host = input("ENTER HOST NAME: ")
+                Host_conv = requests.get(f"http://ip-api.com/json/{user_host}").json()
+                for key2 in Host_conv:
+                    print("{0: <15} - {1}".format(key2, Host_conv[key2])) 
+                    print("\n")
+            elif command == "cls":
+                os.system("cls")
+            elif command == "list":
+             print(f"""{Fore.BLUE}Availaible Options:
+         [A] Track by IP Address - Example [111.111.11.1]
+         [B] Track by Host Name - Example [www.example.com]
+         [C] Exit (Exits the program)
+         """)
+            elif command == "C":
+                  print(Fore.RESET)
+                  pass
+            else:
+                   print(Fore.RESET)  
+                   print(Fore.RED+"Wrong Command! Try Again.")
         # download youtube videos
         elif z == "pkg.youtube":
             try:
@@ -438,7 +471,8 @@ This Software is licensed to {getpass.getuser()}.
                 if __name__ == '__main__':
                     run()
             except:
-                print("Unknown Error Was Found!")
+                print("Unknown Error Was Found!")     
+            
         # get files from internet
         elif z == "pkg.download":
             try:
@@ -605,7 +639,8 @@ This Software is licensed to {getpass.getuser()}.
 |------------------------------------------------------------|
 |[*] "ddos.start" Starts an ddos Attack.                     |                                                       
 |[*] "host.getip" Get ip address of host by host url.        |      
-|[*] "ip.get" Gets host name from ip                         |
+|[*] "ip.get" Gets host name from ip.                        |
+|[*] "ip.info" To get IP info.                               |
 |[*] "wlan/show.pass" Show Wifi passwords.                   |
 |[*] "lanport/scan.ip" to scan ip address.                   |
 |------------------------------------------------------------|
@@ -638,7 +673,7 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "ls" to list files currently stored in this directory.          |
 |[*] "ls -a" to list files currently stored in this directory.       |
 |[*] "terminal" to use Windows CMD in this Terminal.                 |
-|[*] "python.run" to run python if intalled.                         |
+|[*] "python.run" to run python if installed.                        |
 |[*] "wlan.renew" to renew all adapters.                             |
 |[*] "wlan.release" for releasing all the adapters.                  |
 |[*] "net.speedtest" for testing network speed.                      |
@@ -646,6 +681,8 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "win.ver" to show current version of windows.                   |
 |[*] "mb.gb" for converting Megabytes into Gigabytes .               |
 |[*] "gb.mb" for converting Gigabytes into Megabytes.                |  
+|[*] "update.commandline" for updating commandline.                  |
+|[*] "git.clone" for cloning git repositories.                       |
 |--------------------------------------------------------------------|
 """)
 
@@ -714,10 +751,73 @@ This Software is licensed to {getpass.getuser()}.
         if user_input == "y":
             print("Exiting console...")
             exit()
-
+def commandlineupdate():
+    try:
+       versionquery = "2.0.0"
+       request = requests.get('https://pastebin.com/1tpj8vpk')
+       if ("2w.0e.1s" in request.text):
+           if (versionquery =="2w.0e.2s"):
+               print("Update Not Availaible\n")
+           else:
+               print("Update Availaible\n")
+               ask_to_update = input("Do you want to update? (Y/N): ")
+               if ask_to_update == "Y":
+                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.rar") #where new files will be stored.
+                   print("\n")
+                   print(f"Creating a New Directory named CommandLineDownload...\n")
+                   sleep(1)
+                   os.mkdir("CommandLineDownload")
+                   sleep(2)
+                   print("Extracting the Downloaded files...\n")
+                   current_dir = os.getcwd()
+                   patoolib.extract_archive(
+                       "CommandLine.rar", outdir=current_dir+"\\CommandLineDownload")
+                   sleep(1)
+                   print("Extraction Successful\n")
+                   sleep(1)
+                   print("Running the Setup File...\n")
+                   sleep(1)
+                   try:
+                       os.startfile(current_dir+"\\CommandLineDownload\\AutoInstall.bat")
+                   except:
+                     try:  
+                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine.exe")
+                       sleep(10)
+                       os.startfile(current_dir+"\\CommandLineDownload\\Commands.chm")
+                     except OSError as e:
+                         print("Opertation cancelled\n")
+                   ask_to_delete = input("Do you want to delete the downloaded files? (Y/N): ")
+                   if ask_to_delete == "Y":
+                       shutil.rmtree("CommandLineDownload")
+                       try:  
+                           os.remove("CommandLine.rar")
+                       except:  
+                           print("Deletion Successful\n")
+                           sleep(2)
+                   else:
+                       print("Deletion Cancelled\n")
+                       
+               else:
+                   print("OK -- Skipped Update 2.0.2 | -> use 'update.commandline' to Update to Latest Version\n")
+       else:
+          print("Update Not Availaible\n")
+    except:
+            pass        
+    
 
 if __name__ == "__main__":
+    try:
+        print("Checking for updates...")
+        print("\n")
+        print("Please be Patient...")
+        commandlineupdate()
+        sleep(2)
+        print("Clearing the Console...")
+        os.system("cls")
+    except:
+        pass
     while True:
+
         try:
             import getpass
             z = input(f"{getpass.getuser()} ~$: ").strip()
