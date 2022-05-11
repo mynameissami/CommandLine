@@ -10,15 +10,12 @@ Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 2.0.0
+Version   : 2.0.1
 Language  : Python3.10.4
 ================================================
-Release 2.0.0 - Mega Update
+Release 2.0.1 - Minor Update
 =============================
 Fixed : Minor Bugs
-Added : IP Tracker
-Added : Auto-Updater is now Build-In in CommandLine
-Added : Git-Cloner in CommandLine
 Added : More Optimizations.
 ============================= 
 =================================================
