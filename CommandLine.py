@@ -15,7 +15,7 @@ def usercommand(self):
 
         if z == "about":
             # Shows About Info
-            print("""CommandLine is an Opensource Program by Aisoft.""")
+            print("""CommandLine is an Opensource Program by Muhammad Sami Furqan.""")
 
         # Shows License Info.
         elif z == "license":
@@ -28,7 +28,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.0 * Latest *                           |
+|-> Version 2.0.1 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -753,16 +753,16 @@ This Software is licensed to {getpass.getuser()}.
             exit()
 def commandlineupdate():
     try:
-       versionquery = "2.0.0"
+       versionquery = "2.0.1"
        request = requests.get('https://pastebin.com/1tpj8vpk')
-       if ("2w.0e.1s" in request.text):
+       if ("2w.0e.2s" in request.text):
            if (versionquery =="2w.0e.2s"):
                print("Update Not Availaible\n")
            else:
                print("Update Availaible\n")
                ask_to_update = input("Do you want to update? (Y/N): ")
                if ask_to_update == "Y":
-                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.rar") #where new files will be stored.
+                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.rar")
                    print("\n")
                    print(f"Creating a New Directory named CommandLineDownload...\n")
                    sleep(1)
@@ -823,10 +823,21 @@ if __name__ == "__main__":
             z = input(f"{getpass.getuser()} ~$: ").strip()
             c = usercommand(z)
         except KeyboardInterrupt:
-            askussr = input("Do you want to quit? y or n : ")
-            if askussr == "y":
-                print("Quitting...")
-                exit()
+            
+            while KeyboardInterrupt:
+              try:
+                ask_to_exit = input("Do you want to exit the console? y or n :\n")
+                if ask_to_exit == "y":
+                    quit()
+                else:
+                    break
+                    
+              except KeyboardInterrupt:
+                  break
+              except EOFError as e:
+               pass
+          
+                  
         except IOError as op:
             print(f"{op}")
         except ValueError as VE:
