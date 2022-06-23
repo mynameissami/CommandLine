@@ -5,9 +5,9 @@ import shutil
 from time import sleep
 import requests
 import wget
-import patoolib
 import os
 from getpass import getuser
+from zipfile import ZipFile
 
 
 def usercommand(self):
@@ -28,7 +28,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.1 * Latest *                           |
+|-> Version 2.0.2 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -382,9 +382,121 @@ This Software is licensed to {getpass.getuser()}.
             ask_folder_name = input("Enter the folder name(new folder to store files): ")
             combine_a = ask_abt_dir+"\\"+ask_folder_name
             Repo.clone_from(ask_abt_url, combine_a)
+        
+        elif z=="scanfix":
+            import os
+            from time import sleep
+            import getpass
+            import shutil
+            init(convert=True)
+            os.system("cls")
+            print(f"""{Fore.BLUE}Select option:
+            [a] Scan&fix system. [Scans and fix the broken files].
+            [b] Clear temp files. [Clears the temporary files].
+            [c] Just verify the system. [Just verifies the system files & let you know if something is broken].
+                      """)
+            print(f"{Fore.RESET}")
+            option = input(f"{Fore.RED}=> ")
+            # this takes an input from the user and checks if it is a valid option.
+            if option == "a":
+                # if the user selects option a, the program will scan and fix the broken files.
+                try:
+                    sleep(2)
+                    print(f"{Fore.RED} This process could take some time.")
+                    # sfc/scannow is the command that scans and fix the files automatically.
+                    os.system("sfc/scannow")
+                # if the user presses ctrl+c, the program will ask for stopping the process.
+                except KeyboardInterrupt:
+                    ask_stop_scan = input(" Do you want to stop the scan?[y/n]: ")
+                    if ask_stop_scan == "y":
+                        pass
+                    else:
+                        pass
+                    
+            elif option == "b":
+                sleep(2)
+                print(f"{Fore.RED}This process could take some time.")
+                sleep(1)
+                print(f"{Fore.BLUE}Checking Temp folders...")
+                sleep(1)
+                print(f"{Fore.BLUE}Cleaning c:\windows\\temp...")
+                try:
+                    del_dir = r'c:\windows\temp'  # the directory that will be deleted.
+                    # this deletes the directory with ignored errors.
+                    shutil.rmtree(del_dir, ignore_errors=True)
+                except:
+                    print(f"{Fore.RED}Unknown Error was Found!")
+                print(f"{Fore.RED}Cleaning Completed!")
+                sleep(1)
+                print(f"{Fore.BLUE}Cleaning c:\\AppData\\Local\Temp...")
+                try:
+                    getusr = getpass.getuser()  # this will get the current user
+                    # directory that will be deleted.
+                    del_app_cache = r'c:\Users\%s\AppData\Local\Temp' % getusr
+                    # this will delete the directory with ignored errors.
+                    shutil.rmtree(del_app_cache, ignore_errors=True)
+                except:
+                    print(f"{Fore.RED}Unknown Error was Found!")
+                print(f"{Fore.RED}Cleaning Completed!")
+                usr_ask_log = input("Do you want to save a log of the cleaning?[y/n]: ")
+                if usr_ask_log == "y":
+                    try:
+                        # this will create a log file in the same directory as the program.
+                        with open("logs.txt", "a") as f:
+                            f.write("Logs Created by scanfix kit\n")
+                            f.write("==========================\n")
+                            f.writelines("""Files that are not deleted:\n""")
+                            f.writelines(
+                                'Files in c:\\Users\\UserName\\AppData\\Local\\Temp\n')
+                            f.close()
+                            with open("logs.txt", "a") as f:
+                                # basically with the help of this code, the program will write the files that are not deleted in the Temp folders.
+                                # both temp folder and the AppData\\Local\\Temp folder. will be written in the log file.
+                                files_get = os.listdir(
+                                    r'c:\Users\%s\AppData\Local\Temp' % getusr)
+                                f.close()
+                                for file in files_get:
+                                    f = open("logs.txt", "a")
+                                    f.writelines(file+"\n")
+                                    f.close()
+                                f = open("logs.txt", "a")
+                                f.write("\n")
+                                f.write("==========================\n")
+                                f.write('\n')
+                                f.write("==========================\n")
+                                f.close()
+                            f = open("logs.txt", "a")
+                            f.writelines('Files in c:\windows\\temp\n')
+                            with open("logs.txt", "a") as f:
+                                files_get1 = os.listdir(r'c:\\windows\\temp\\')
+                                f.close()
+                                for file in files_get1:
+                                    f = open("logs.txt", "a")
+                                    f.writelines(file+"\n")
+                                    f.close()
+                                f = open("logs.txt", "a")
+                                f.write("\n")
+                                f.write("==========================\n")
+                    except FileNotFoundError:
+                        pass
+            elif option == "c":
+                 # if the user selects option c, the program will scans the broken files.
+                try:
+                    sleep(2)
+                    print(f"{Fore.RED} This process could take some time.")
+                    # sfc/verifyonly is the command that scans files.
+                    os.system("sfc/verifyonly")
+                # if the user presses ctrl+c, the program will ask for stopping the process.
+                except KeyboardInterrupt:
+                    ask_stop_scan2 = input(" Do you want to stop the scan?[y/n]: ")
+                    if ask_stop_scan2 == "y":
+                        pass
+                    else:
+                        pass
 
 #-------------------Hacking Scripts---------------------------------#
         elif z == "ip.info":
+            import requests
             init(convert=True)
             print(f"""{Fore.BLUE}Select Options:
 [A] Track by IP Address - Example [111.111.11.1]
@@ -395,6 +507,7 @@ This Software is licensed to {getpass.getuser()}.
             
             command=input(f"{Fore.RED}{getuser()}$: ")
             if command == "A":
+
                 print(Fore.RESET)
                 user_ip = input(Fore.BLUE+"ENTER IP ADDRESS: ")
                 url = "http://ip-api.com/json/{0}"
@@ -637,6 +750,7 @@ This Software is licensed to {getpass.getuser()}.
         elif z == "show.scripts":
             print(""" The Availaible scripts are :
 |------------------------------------------------------------|
+|[*] "scanfix" starts windows fix kit.                       |
 |[*] "ddos.start" Starts an ddos Attack.                     |                                                       
 |[*] "host.getip" Get ip address of host by host url.        |      
 |[*] "ip.get" Gets host name from ip.                        |
@@ -753,7 +867,8 @@ This Software is licensed to {getpass.getuser()}.
             exit()
 def commandlineupdate():
     try:
-       versionquery = "2.0.1"
+       import zipfile
+       versionquery = "2.0.2"
        request = requests.get('https://pastebin.com/1tpj8vpk')
        if ("2w.0e.2s" in request.text):
            if (versionquery =="2w.0e.2s"):
@@ -762,7 +877,7 @@ def commandlineupdate():
                print("Update Availaible\n")
                ask_to_update = input("Do you want to update? (Y/N): ")
                if ask_to_update == "Y":
-                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.rar")
+                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.zip")
                    print("\n")
                    print(f"Creating a New Directory named CommandLineDownload...\n")
                    sleep(1)
@@ -770,27 +885,29 @@ def commandlineupdate():
                    sleep(2)
                    print("Extracting the Downloaded files...\n")
                    current_dir = os.getcwd()
-                   patoolib.extract_archive(
-                       "CommandLine.rar", outdir=current_dir+"\\CommandLineDownload")
+                   current_dir23 = current_dir+"\\CommandLine.zip"
+                   ext_loc = current_dir + "\\CommandLineDownload"
+                   with zipfile.ZipFile(current_dir23,'r') as zip_ref:
+                       zip_ref.extractall(ext_loc)
                    sleep(1)
                    print("Extraction Successful\n")
                    sleep(1)
                    print("Running the Setup File...\n")
                    sleep(1)
                    try:
-                       os.startfile(current_dir+"\\CommandLineDownload\\AutoInstall.bat")
+                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\AutoInstall.bat")
                    except:
                      try:  
-                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine.exe")
+                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\CommandLine.exe")
                        sleep(10)
-                       os.startfile(current_dir+"\\CommandLineDownload\\Commands.chm")
+                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\Commands.chm")
                      except OSError as e:
                          print("Opertation cancelled\n")
                    ask_to_delete = input("Do you want to delete the downloaded files? (Y/N): ")
                    if ask_to_delete == "Y":
                        shutil.rmtree("CommandLineDownload")
                        try:  
-                           os.remove("CommandLine.rar")
+                           os.remove("CommandLine.zip")
                        except:  
                            print("Deletion Successful\n")
                            sleep(2)
@@ -798,11 +915,11 @@ def commandlineupdate():
                        print("Deletion Cancelled\n")
                        
                else:
-                   print("OK -- Skipped Update 2.0.2 | -> use 'update.commandline' to Update to Latest Version\n")
+                   print("OK -- Skipped Update 2.0.3 | -> use 'update.commandline' to Update to Latest Version\n")
        else:
           print("Update Not Availaible\n")
     except:
-            pass        
+            pass             
     
 
 if __name__ == "__main__":
@@ -814,6 +931,9 @@ if __name__ == "__main__":
         sleep(2)
         print("Clearing the Console...")
         os.system("cls")
+        print("CommandLine\n")
+        print("Copyright (c) 2022. All Rights Reserved.\n")
+        print("Make sure to Run as Administrator. Active Internet connection is required to run things properly.\n")
     except:
         pass
     while True:
