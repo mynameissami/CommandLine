@@ -895,12 +895,12 @@ def commandlineupdate():
                    print("Running the Setup File...\n")
                    sleep(1)
                    try:
-                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\AutoInstall.bat")
+                       os.startfile(current_dir+"\\CommandLineDownload\\AutoInstall.bat")
                    except:
                      try:  
-                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\CommandLine.exe")
+                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine.exe")
                        sleep(10)
-                       os.startfile(current_dir+"\\CommandLineDownload\\CommandLine\\Commands.chm")
+                       os.startfile(current_dir+"\\CommandLineDownload\\Commands.chm")
                      except OSError as e:
                          print("Opertation cancelled\n")
                    ask_to_delete = input("Do you want to delete the downloaded files? (Y/N): ")
