@@ -868,10 +868,10 @@ This Software is licensed to {getpass.getuser()}.
 def commandlineupdate():
     try:
        import zipfile
-       versionquery = "2.0.2"
+       versionquery = "2w.0e.2s"
        request = requests.get('https://pastebin.com/1tpj8vpk')
-       if ("2w.0e.2s" in request.text):
-           if (versionquery =="2w.0e.2s"):
+       if ("2w.0e.3s" in request.text):
+           if (versionquery =="2w.0e.3s"):
                print("Update Not Availaible\n")
            else:
                print("Update Availaible\n")
