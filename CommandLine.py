@@ -879,7 +879,7 @@ def commandlineupdate():
                print("Update Availaible\n")
                ask_to_update = input("Do you want to update? (Y/N): ")
                if ask_to_update == "Y":
-                   wget.download("https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.zip")
+                   wget.download("Hidden Url")
                    print("\n")
                    print(f"Creating a New Directory named CommandLineDownload...\n")
                    sleep(1)
