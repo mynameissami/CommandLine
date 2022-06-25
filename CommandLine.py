@@ -28,7 +28,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.3 * Latest *                           |
+|-> Version 2.0.4 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -75,6 +75,7 @@ This Software is licensed to {getpass.getuser()}.
             cwd = os.getcwd()
             onlyfiles = [os.path.join(cwd, f) for f in os.listdir(cwd) if
                          os.path.isfile(os.path.join(cwd, f))]
+            print(onlyfiles)
          
 
         # Create a new file
@@ -870,16 +871,16 @@ This Software is licensed to {getpass.getuser()}.
 def commandlineupdate():
     try:
        import zipfile
-       versionquery = "2w.0e.3s"
+       versionquery = "2w.0e.4s"
        request = requests.get('https://pastebin.com/1tpj8vpk')
-       if ("2w.0e.4s" in request.text):
-           if (versionquery =="2w.0e.4s"):
+       if ("2w.0e.5s" in request.text):
+           if (versionquery =="2w.0e.5s"):
                print("Update Not Availaible\n")
            else:
                print("Update Availaible\n")
                ask_to_update = input("Do you want to update? (Y/N): ")
                if ask_to_update == "Y":
-                   wget.download("Hidden Url")
+                   wget.download("Hidden Server --> This can be changed manually.. Cant be shown")
                    print("\n")
                    print(f"Creating a New Directory named CommandLineDownload...\n")
                    sleep(1)
@@ -918,7 +919,7 @@ def commandlineupdate():
                        print("Deletion Cancelled\n")
                        
                else:
-                   print("OK -- Skipped Update 2.0.4 | -> use 'update.commandline' to Update to Latest Version\n")
+                   print("OK -- Skipped Update 2.0.5 | -> use 'update.commandline' to Update to Latest Version\n")
        else:
           print("Update Not Availaible\n")
     except:
@@ -927,9 +928,32 @@ def commandlineupdate():
 
 if __name__ == "__main__":
     try:
+        print("Analyzing CommandLine Directory")
+        try:                           
+            shutil.rmtree("CommandLineDownload")
+        except:
+           pass
+        try:                           
+            import hashlib, os
+            unique = dict()
+            for filename in os.listdir('.'):
+             if filename =="CommandLine.exe" or filename == "CommandLine.py":
+                    pass
+             else:
+                if os.path.isfile(filename):
+                    filehash = hashlib.md5(open(filename, 'rb').read()).hexdigest()
+
+                    if filehash not in unique: 
+                        unique[filehash] = filename
+                    else:
+                        pass
+                    os.remove(filename)
+        except:
+           pass
+        sleep(2)
         print("Checking for updates...")
         print("\n")
-        print("Please be Patient...")
+        print("Please be Patient...")       
         commandlineupdate()
         sleep(2)
         print("Clearing the Console...")
@@ -938,8 +962,9 @@ if __name__ == "__main__":
         print("CommandLine\n")
         print("Copyright (c) 2022. All Rights Reserved.\n")
         print("Make sure to Run as Administrator. Active Internet connection is required to run things properly.\n")
-    except:
-        pass
+    except Exception as e:
+        print(e)
+       
     while True:
 
         try:
