@@ -4,20 +4,19 @@
 [1] I am not responsible for how you use this.
 [2] Any illegal distribution will not be tolerated.
 [3] Don't sell this software for money.
-License Info By Aisoft-co
 ================================================
 Software  : CommandLine
 Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 2.0.3
+Version   : 2.0.4
 Language  : Python3.10.4
 ================================================
-Release 2.0.3 - Minor Update
+Release 2.0.4 - Minor Update
 =============================
 Fixed : Minor Bugs..
-Fixed : Python not working correctly.
-Fixed : ls not showing folders.
-Added : no color command for changing the colors to default.
+Fixed : ls -a not showing anything.
+Fixed : Auto Update not working correctly.
+Fixed : Added Auto clearing directory.
 ============================= 
