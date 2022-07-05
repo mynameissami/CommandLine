@@ -1,3 +1,4 @@
+from pprint import pp
 from colorama import *
 from time import sleep
 import os
@@ -28,7 +29,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.4 * Latest *                           |
+|-> Version 2.0.6 * Latest *                           |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -446,8 +447,9 @@ This Software is licensed to {getpass.getuser()}.
                     try:
                         # this will create a log file in the same directory as the program.
                         with open("logs.txt", "a") as f:
-                            f.write("Logs Created by scanfix kit\n")
+                            f.write("Logs Created by scanfix kit - CommandLine\n")
                             f.write("==========================\n")
+                            f.write(f"The date of creation : {datetime.datetime.now()}\n")
                             f.writelines("""Files that are not deleted:\n""")
                             f.writelines(
                                 'Files in c:\\Users\\UserName\\AppData\\Local\\Temp\n')
@@ -496,7 +498,14 @@ This Software is licensed to {getpass.getuser()}.
                         pass
                     else:
                         pass
-
+        elif z == "tasks.show":
+            import os
+            show_tasks = os.popen('tasklist').read()
+            print(show_tasks)
+        elif z == "tasks.kill":
+            import os
+            user_taskkill = input("Enter Task Name to kill : ")
+            os.system("taskkill /im "+user_taskkill)
 #-------------------Hacking Scripts---------------------------------#
         elif z == "ip.info":
             import requests
@@ -800,6 +809,8 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "update.commandline" for updating commandline.                  |
 |[*] "git.clone" for cloning git repositories.                       |
 |[*] "nocolor" clears the color sets to default.                     |
+|[*] "tasks.show" Show all running tasks.                            |
+|[*] "tasks.kill" Kills the specified task.                          |
 |--------------------------------------------------------------------|
 """)
 
@@ -810,7 +821,10 @@ This Software is licensed to {getpass.getuser()}.
             s.connect(("8.8.8.8", 80))
             print("The ip address of this machine is "+s.getsockname()[0])
             s.close()
-
+        elif z == "calc":
+            print("Use [*] for Multiplication, [+] for Sum , [/] for Divivde , [-] for Sutract Eg : 23 + 12")
+            calcin = input("Caculate : ")
+            print(eval(calcin))
         # Show website ip addresses
         elif z == "net/showwebip":
             try:
@@ -848,6 +862,7 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "del.file" to delete a file.                      |
 |[*] "rename.file" to rename a file.                   |
 |[*] "open.file" to open files.                        |
+|[*] "calc" Calculator - Basic + Advanced              |
 |[*] "update.file" to update the file.                 |
 |[*] "exit" to exit the console.                       | 
 |[*] "cls" or "clear"  to clear Console.               |
@@ -871,16 +886,16 @@ This Software is licensed to {getpass.getuser()}.
 def commandlineupdate():
     try:
        import zipfile
-       versionquery = "2w.0e.4s"
+       versionquery = "2w.0e.6s"
        request = requests.get('https://pastebin.com/1tpj8vpk')
-       if ("2w.0e.5s" in request.text):
-           if (versionquery =="2w.0e.5s"):
+       if ("2w.0e.7s" in request.text):
+           if (versionquery =="2w.0e.7s"):
                print("Update Not Availaible\n")
            else:
                print("Update Availaible\n")
                ask_to_update = input("Do you want to update? (Y/N): ")
                if ask_to_update == "Y":
-                   wget.download("Hidden Server --> This can be changed manually.. Cant be shown")
+                   wget.download("Link TO download -- Hidden Due to privacy")
                    print("\n")
                    print(f"Creating a New Directory named CommandLineDownload...\n")
                    sleep(1)
@@ -919,7 +934,7 @@ def commandlineupdate():
                        print("Deletion Cancelled\n")
                        
                else:
-                   print("OK -- Skipped Update 2.0.5 | -> use 'update.commandline' to Update to Latest Version\n")
+                   print("OK -- Skipped Update 2.0.7 | -> use 'update.commandline' to Update to Latest Version\n")
        else:
           print("Update Not Availaible\n")
     except:
@@ -933,6 +948,25 @@ if __name__ == "__main__":
             shutil.rmtree("CommandLineDownload")
         except:
            pass
+        try:
+            import ctypes, os
+
+            def isAdmin():
+                try:
+                    is_admin = (os.getuid() == 0)
+                except AttributeError:
+                    is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+                return is_admin
+            if isAdmin() == False:
+                ask_exeit_add = input("The Program is not in Administrator mode. Do You still want to Continue : [y/n]")
+                if ask_exeit_add == "y" or ask_exeit_add == "Y":
+                    pass
+                else:
+                    print("OK - Closing Console")
+                    quit()
+                    
+        except:
+            pass
         try:                           
             import hashlib, os
             unique = dict()
@@ -942,7 +976,6 @@ if __name__ == "__main__":
              else:
                 if os.path.isfile(filename):
                     filehash = hashlib.md5(open(filename, 'rb').read()).hexdigest()
-
                     if filehash not in unique: 
                         unique[filehash] = filename
                     else:
