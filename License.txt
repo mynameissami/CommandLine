@@ -10,15 +10,12 @@ Usage     : For Pentesters and Ethical Hackers.
 liscence  : Open-Source
 Interface : CLI (command-line Interface)
 Type      : Terminal
-Version   : 2.0.5
+Version   : 2.0.7
 Language  : Python3.10.4
 ================================================
-Release 2.0.5 - Minor Update
+Release 2.0.7 - Minor Update 
 =============================
 Fixed : Minor Bugs.
 Fixed : Main screen bugs.
-Added : Calculator.
-Added : Now can see tasks and kill them.
-Fixed : Not Admin Problems. (Warning will be given when not in admin mode).
-Fixed : Scan Fix kit.
+Fixed : Smart Auto update.
 ============================= 
