@@ -1032,8 +1032,11 @@ def commandlineupdate():
             notification_c(f"The new update is Found -> {web_rem_strip2} ")
             ask_to_update = input("Do you want to update? (Y/N): ")
             if ask_to_update == "Y" or ask_to_update == "y":
-                wget.download(
-                    "https://allpetsworld.000webhostapp.com/commandlinedownload/CommandLine.zip")
+              try:   
+              wget.download(
+                    "This link is hidden")
+              except:
+               pass
                 print("\n")
                 print(f"Creating a New Directory named CommandLineDownload...\n")
                 sleep(1)
