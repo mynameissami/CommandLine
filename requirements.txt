@@ -5,3 +5,4 @@ pytube
 speedtest-cli
 colorama
 patool
+plyer
